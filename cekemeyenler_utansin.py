@@ -2,7 +2,6 @@ import requests
 import json
 from bs4 import BeautifulSoup
 
-_borsa_url = "http://bigpara.hurriyet.com.tr/borsa/canli-borsa/"
 _doviz_url = "http://bigpara.hurriyet.com.tr/doviz/"
 _altin_url = "http://bigpara.hurriyet.com.tr/altin/"
 
@@ -10,15 +9,15 @@ def kurcek():
 	global _doviz_verileri
 	global _altin_verileri
 	
-	_r2 = requests.get(_doviz_url)
+	_r = requests.get(_doviz_url)
+	_soup = BeautifulSoup(_r.content,"html.parser")
+	
+	_r2 = requests.get(_altin_url)
 	_soup2 = BeautifulSoup(_r2.content,"html.parser")
 	
-	_r3 = requests.get(_altin_url)
-	_soup3 = BeautifulSoup(_r3.content,"html.parser")
+	_doviz_verisi = _soup.find_all("div",{"class":"tableBox srbstPysDvz"})
 	
-	_doviz_verisi = _soup2.find_all("div",{"class":"tableBox srbstPysDvz"})
-	
-	_altin_verisi = _soup3.find_all("div",{"class":"table wide pgAltin"})
+	_altin_verisi = _soup2.find_all("div",{"class":"table wide pgAltin"})
 	
 	for _doviz in _doviz_verisi:
 	
