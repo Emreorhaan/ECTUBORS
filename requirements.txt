@@ -1,0 +1,5 @@
+discord
+datetime
+requests
+json
+bs4
