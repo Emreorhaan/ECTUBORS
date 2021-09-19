@@ -1,5 +1,4 @@
 discord.py
 datetime
 requests
-json
 bs4
