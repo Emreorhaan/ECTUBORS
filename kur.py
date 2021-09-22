@@ -23,7 +23,7 @@ class kurBilgisi(commands.Cog):
 		cu.kurcek()
 		dolar = cu.dolar()[1] + " TL || " + cu.dolar()[3]+"%"
 		euro = cu.euro()[1] + " TL || " + cu.euro()[3]+"%"
-		altin = cu.altin()[1] + " TL || " + cu.altin()[3]+"%"
+		altin = cu.altin()[1] + " TL || " + cu.altin()[3]
 		
 		tarih = datetime.datetime.now()
 		
@@ -37,7 +37,7 @@ class kurBilgisi(commands.Cog):
 		await message.send(embed=embed)
 		
 	@commands.command()
-	async def coin(self, message):
+	async def coins(self, message):
 
 		tarih = datetime.datetime.now()
 		
@@ -63,38 +63,22 @@ class kurBilgisi(commands.Cog):
 		embed.add_field(name="LINK", value=link+"$", inline=False)
 		embed.set_footer(text="Son Güncelleme Tarihi: "+tarih)
 		await message.send(embed=embed)
-		
+
 	@commands.command()
-	async def btc(self,message):
-		await message.send("BTC: "+cu.coin("BTCUSDT")+"$")
-		
-	@commands.command()
-	async def eth(self,message):
-		await message.send("ETH: "+cu.coin("ETHUSDT")+"$")
-		
-	@commands.command()
-	async def ada(self,message):
-		await message.send("ADA: "+cu.coin("ADAUSDT")+"$")
-		
-	@commands.command()
-	async def bnb(self,message):
-		await message.send("BNB: "+cu.coin("BNBUSDT")+"$")
-		
-	@commands.command()
-	async def avax(self,message):
-		await message.send("AVAX: "+cu.coin("AVAXUSDT")+"$")
-		
-	@commands.command()
-	async def dot(self,message):
-		await message.send("DOT: "+cu.coin("DOTUSDT")+"$")
-		
-	@commands.command()
-	async def xrp(self,message):
-		await message.send("XRP: "+cu.coin("XRPUSDT")+"$")
-		
-	@commands.command()
-	async def link(self,message):
-		await message.send("LINK: "+cu.coin("LINKUSDT")+"$")
+	async def coin(self, message, *args):
+		if len(args) == 2:
+			try:
+				coininfo = cu.coin(args[0].upper()+"USDT")
+				coininfo = coininfo[0:7]
+				
+				await message.send(args[1] +" "+args[0].upper()+": "+str(float(coininfo) * float(args[1]))+"$")
+			
+			except:
+				await message.send("Hatalı Komut")
+		else:
+			coininfo = cu.coin(args[0].upper()+"USDT")
+			coininfo = coininfo[0:7]
+			await message.send(args[0].upper()+": "+coininfo+"$")
 
 	
 def setup(bot):
