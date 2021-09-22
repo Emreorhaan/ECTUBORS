@@ -23,7 +23,7 @@ class kurBilgisi(commands.Cog):
 		cu.kurcek()
 		dolar = cu.dolar()[1] + " TL || " + cu.dolar()[3]+"%"
 		euro = cu.euro()[1] + " TL || " + cu.euro()[3]+"%"
-		altin = cu.altin()[1] + " TL || " + cu.euro()[3]+"%"
+		altin = cu.altin()[1] + " TL || " + cu.altin()[3]+"%"
 		
 		tarih = datetime.datetime.now()
 		
