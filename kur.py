@@ -1,6 +1,6 @@
 import discord
 from discord.ext import commands
-import cekemeyenler_utansin as cu
+import cekemeyenler_utansin as c
 import datetime
 
 
@@ -20,10 +20,10 @@ class kurBilgisi(commands.Cog):
 		
 	@commands.command()
 	async def kur(self, message):
-		cu.kurcek()
-		dolar = cu.dolar()[1] + " TL || " + cu.dolar()[3]+"%"
-		euro = cu.euro()[1] + " TL || " + cu.euro()[3]+"%"
-		altin = cu.altin()[1] + " TL || " + cu.altin()[3]
+		c.kurcek()
+		dolar = c.dolar()[1] + " TL || " + c.dolar()[3]+"%"
+		euro = c.euro()[1] + " TL || " + c.euro()[3]+"%"
+		altin = c.altin()[1] + " TL || " + c.altin()[3]
 		
 		tarih = datetime.datetime.now()
 		
@@ -43,14 +43,14 @@ class kurBilgisi(commands.Cog):
 		
 		tarih = str(tarih.hour) +"."+ str(tarih.minute) +"  "+ str(tarih.day) +"."+ str(tarih.month) +"."+ str(tarih.year)
 		
-		btc = cu.coin("BTCUSDT")
-		eth = cu.coin("ETHUSDT")
-		ada = cu.coin("ADAUSDT")
-		bnb = cu.coin("BNBUSDT")
-		dot = cu.coin("DOTUSDT")
-		avax = cu.coin("AVAXUSDT")
-		xrp = cu.coin("XRPUSDT")
-		link = cu.coin("LINKUSDT")
+		btc = c.coin("BTCUSDT")
+		eth = c.coin("ETHUSDT")
+		ada = c.coin("ADAUSDT")
+		bnb = c.coin("BNBUSDT")
+		dot = c.coin("DOTUSDT")
+		avax = c.coin("AVAXUSDT")
+		xrp = c.coin("XRPUSDT")
+		link = c.coin("LINKUSDT")
 						
 		embed=discord.Embed(title="KRİPTO PARA PİYASASI", color=0x00ffff)
 		embed.add_field(name="BTC", value=btc + "$", inline=False)
@@ -68,7 +68,7 @@ class kurBilgisi(commands.Cog):
 	async def coin(self, message, *args):
 		if len(args) == 2:
 			try:
-				coininfo = cu.coin(args[0].upper()+"USDT")
+				coininfo = c.coin(args[0].upper()+"USDT")
 				coininfo = coininfo[0:7]
 				
 				await message.send(args[1] +" "+args[0].upper()+": "+str(float(coininfo) * float(args[1]))+"$")
@@ -76,7 +76,7 @@ class kurBilgisi(commands.Cog):
 			except:
 				await message.send("Hatalı Komut")
 		else:
-			coininfo = cu.coin(args[0].upper()+"USDT")
+			coininfo = c.coin(args[0].upper()+"USDT")
 			coininfo = coininfo[0:7]
 			await message.send(args[0].upper()+": "+coininfo+"$")
 
