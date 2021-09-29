@@ -13,21 +13,27 @@ class kurBilgisi(commands.Cog):
 	async def yardim(self, message):
 		embed=discord.Embed(title="KOMUTLAR", description="============", color=0x00ffff)
 		embed.add_field(name="e!kur", value="Bazı para birimlerinin ve değerli madenlerin değerlerini gösterir", inline=False)
-		embed.add_field(name="e!coin", value="Bazı kripto paraların değerlerini gösterir", inline=False)
-		embed.add_field(name="e! + coin ismi", value="Örnek: e!btc, e!eth, e!avax", inline=False)
+		embed.add_field(name="e!coins", value="Bazı kripto paraların değerlerini gösterir", inline=False)
+		embed.add_field(name="e!coin + coin ismi", value="Örnek: e!coin btc", inline=False)
+		embed.add_field(name="e!coin + coin ismi + adet", value="Örnek: e!coin btc 2", inline=False)
 		await message.send(embed=embed)
 		
 		
 	@commands.command()
 	async def kur(self, message):
 		c.kurcek()
+			
 		dolar = c.dolar()[1] + " TL || " + c.dolar()[3]+"%"
 		euro = c.euro()[1] + " TL || " + c.euro()[3]+"%"
-		altin = c.altin()[1] + " TL || " + c.altin()[3]
+		altin = c.altin()[1] + " TL || " + c.altin()[3].replace("%","") + "%"
 		
 		tarih = datetime.datetime.now()
+		saat = tarih.hour + 3
 		
-		tarih = str(tarih.hour) +"."+ str(tarih.minute) +"  "+ str(tarih.day) +"."+ str(tarih.month) +"."+ str(tarih.year)
+		if saat > 24:
+			saat = saat - 24
+		
+		tarih = str(saat) +"."+ str(tarih.minute) +"  "+ str(tarih.day) +"."+ str(tarih.month) +"."+ str(tarih.year)
 		
 		embed=discord.Embed(title = "EKONOMİ" ,color=0x00ffff)
 		embed.add_field(name="Dolar :dollar:", value=dolar, inline=False)
@@ -40,8 +46,12 @@ class kurBilgisi(commands.Cog):
 	async def coins(self, message):
 
 		tarih = datetime.datetime.now()
+		saat = tarih.hour + 3
 		
-		tarih = str(tarih.hour) +"."+ str(tarih.minute) +"  "+ str(tarih.day) +"."+ str(tarih.month) +"."+ str(tarih.year)
+		if saat > 24:
+			saat = saat - 24
+		
+		tarih = str(saat) +"."+ str(tarih.minute) +"  "+ str(tarih.day) +"."+ str(tarih.month) +"."+ str(tarih.year)
 		
 		btc = c.coin("BTCUSDT")
 		eth = c.coin("ETHUSDT")
