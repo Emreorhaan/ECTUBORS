@@ -28,10 +28,7 @@ class kurBilgisi(commands.Cog):
 		altin = c.altin()[1] + " TL || " + c.altin()[3].replace("%","") + "%"
 		
 		tarih = datetime.datetime.now()
-		saat = tarih.hour + 3
-		
-		if saat > 24:
-			saat = saat - 24
+		saat = tarih.hour
 		
 		tarih = str(saat) +"."+ str(tarih.minute) +"  "+ str(tarih.day) +"."+ str(tarih.month) +"."+ str(tarih.year)
 		
@@ -46,10 +43,7 @@ class kurBilgisi(commands.Cog):
 	async def coins(self, message):
 
 		tarih = datetime.datetime.now()
-		saat = tarih.hour + 3
-		
-		if saat > 24:
-			saat = saat - 24
+		saat = tarih.hour
 		
 		tarih = str(saat) +"."+ str(tarih.minute) +"  "+ str(tarih.day) +"."+ str(tarih.month) +"."+ str(tarih.year)
 		
