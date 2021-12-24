@@ -1,31 +1,43 @@
 import requests
 import json
 from bs4 import BeautifulSoup
+from requests.api import request
 
 _doviz_url = "http://bigpara.hurriyet.com.tr/doviz/"
 _altin_url = "http://bigpara.hurriyet.com.tr/altin/"
+_hisse_url = "https://bigpara.hurriyet.com.tr/borsa/hisse-senetleri/"
 
 def kurcek():
-	global _doviz_verileri
-	global _altin_verileri
+    global _doviz_verileri
+    global _altin_verileri
+    global _hisse_verileri
+
+    _r = requests.get(_doviz_url)
+    _soup = BeautifulSoup(_r.content,"html.parser")
 	
-	_r = requests.get(_doviz_url)
-	_soup = BeautifulSoup(_r.content,"html.parser")
+    _r2 = requests.get(_altin_url)
+    _soup2 = BeautifulSoup(_r2.content,"html.parser")
+    
+    _r3 = requests.get(_hisse_url)
+    _soup3 = BeautifulSoup(_r3.content,"html.parser")
 	
-	_r2 = requests.get(_altin_url)
-	_soup2 = BeautifulSoup(_r2.content,"html.parser")
+    _doviz_verisi = _soup.find_all("div",{"class":"tableBox srbstPysDvz"})
 	
-	_doviz_verisi = _soup.find_all("div",{"class":"tableBox srbstPysDvz"})
+    _altin_verisi = _soup2.find_all("div",{"class":"table wide pgAltin"})
+
+    _hisse_verisi = _soup3.find_all("div", {"class":"contentLeft"})
+
+    for _hisse in _hisse_verisi:
+        
+        _hisse_verileri = _hisse.find_all("li")
 	
-	_altin_verisi = _soup2.find_all("div",{"class":"table wide pgAltin"})
+    for _doviz in _doviz_verisi:
+        
+        _doviz_verileri = _doviz.find_all("li")
 	
-	for _doviz in _doviz_verisi:
-	
-	    _doviz_verileri = _doviz.find_all("li")
-	
-	for _altin in _altin_verisi:
-	
-	    _altin_verileri = _altin.find_all("li")
+    for _altin in _altin_verisi:
+        
+        _altin_verileri = _altin.find_all("li")
 
 def coin(_b):
     _coin_url = requests.get('https://api.binance.com/api/v3/ticker/price')
@@ -62,3 +74,9 @@ def altin():
     _altin.append((_altin_verileri[7].text).strip())
     _altin.append(((_altin_verileri[8].text).strip())[:(len(_doviz_verileri[8].text) - 1)])
     return _altin
+
+def hisse():
+    _hisse = []
+    _hisse.append((_hisse_verileri[11].text).strip())
+    _hisse.append((_hisse_verileri[12].text).strip())
+    return _hisse
