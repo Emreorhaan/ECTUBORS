@@ -1,7 +1,7 @@
 import discord
 from discord.ext import commands
 
-token = "ODkxNjkxNzQ3OTI1Njg4NDMx.YVCCpw.Wk9NkE9wLc22G3l-Lo0Q9pfU6YI"
+token = ""
 
 class Bot(commands.Bot):
 	def __init__(self):
