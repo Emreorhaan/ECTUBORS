@@ -26,6 +26,7 @@ class kurBilgisi(commands.Cog):
 		dolar = c.dolar()[1] + " TL || " + c.dolar()[3]+"%"
 		euro = c.euro()[1] + " TL || " + c.euro()[3]+"%"
 		altin = c.altin()[1] + " TL || " + c.altin()[3].replace("%","") + "%"
+		hisse = c.hisse()[0] + " TL || " + c.hisse()[1].replace("%","") + "%"
 		
 		tarih = datetime.datetime.now()
 		saat = tarih.hour
@@ -36,6 +37,7 @@ class kurBilgisi(commands.Cog):
 		embed.add_field(name="Dolar :dollar:", value=dolar, inline=False)
 		embed.add_field(name="Euro :euro:", value=euro, inline=False)
 		embed.add_field(name="Altın :yellow_circle:", value=altin, inline=False)
+		embed.add_field(name="Bist 100 :regional_indicator_b: ", value=hisse, inline=False)
 		embed.set_footer(text="Son Güncelleme Tarihi: "+tarih)
 		await message.send(embed=embed)
 		
