@@ -27,6 +27,7 @@ class kurBilgisi(commands.Cog):
 		euro = c.euro()[1] + " TL || " + c.euro()[3]+"%"
 		altin = c.altin()[1] + " TL || " + c.altin()[3].replace("%","") + "%"
 		hisse = c.hisse()[0] + " TL || " + c.hisse()[1].replace("%","") + "%"
+		petrol = c.petrol()[0] + " TL || " + c.petrol()[1].replace("%","") + "%"
 		
 		tarih = datetime.datetime.now()
 		saat = tarih.hour
@@ -38,6 +39,7 @@ class kurBilgisi(commands.Cog):
 		embed.add_field(name="Euro :euro:", value=euro, inline=False)
 		embed.add_field(name="Altın :yellow_circle:", value=altin, inline=False)
 		embed.add_field(name="Bist 100 :regional_indicator_b: ", value=hisse, inline=False)
+		embed.add_field(name="Petrol :oil: ", value=petrol, inline=False)
 		embed.set_footer(text="Son Güncelleme Tarihi: "+tarih)
 		await message.send(embed=embed)
 		
@@ -85,6 +87,29 @@ class kurBilgisi(commands.Cog):
 			coininfo = c.coin(args[0].upper()+"USDT")
 			coininfo = coininfo[0:7]
 			await message.send(args[0].upper()+": "+coininfo+"$")
+
+	@commands.command()
+	async def petrol(self, message):
+		c.kurcek()
+			
+		kursunsuz = c.akaryakıt()[0] + " TL "
+		dizel = c.akaryakıt()[1] + " TL "
+		prodizel = c.akaryakıt()[2] + " TL "
+		lpg = c.akaryakıt()[3] + " TL "
+		
+		
+		tarih = datetime.datetime.now()
+		saat = tarih.hour
+		
+		tarih = str(saat) +"."+ str(tarih.minute) +"  "+ str(tarih.day) +"."+ str(tarih.month) +"."+ str(tarih.year)
+		
+		embed=discord.Embed(title = "AKARYAKIT FİYATLARI" ,color=0x00ffff)
+		embed.add_field(name="Kurşunsuz 95: ", value=kursunsuz, inline=False)
+		embed.add_field(name="Dizel: ", value=dizel, inline=False)
+		embed.add_field(name="Pro Dizel: ", value=prodizel, inline=False)
+		embed.add_field(name="LPG: ", value=lpg, inline=False)
+		embed.set_footer(text="Son Güncelleme Tarihi: "+tarih)
+		await message.send(embed=embed)
 
 	
 def setup(bot):
