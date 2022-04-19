@@ -14,7 +14,7 @@ class kurBilgisi(commands.Cog):
 		embed=discord.Embed(title="KOMUTLAR", description="============", color=0x00ffff)
 		embed.add_field(name="e!kur", value="Bazı para birimlerinin ve değerli madenlerin değerlerini gösterir", inline=False)
 		embed.add_field(name="e!akaryakıt", value="İstanbul avrupa bölgesindeki anlık akaryakıt fiyatlarını gösterir", inline=False)
-		embed.add_field(name="e!akaryakıt (il)", value="İstenilen ilin karyakıt fiyatlarını gösterir", inline=False)
+		embed.add_field(name="e!akaryakıt + il", value="İstenilen ilin karyakıt fiyatlarını gösterir", inline=False)
 		embed.add_field(name="e!coins", value="Bazı kripto paraların değerlerini gösterir", inline=False)
 		embed.add_field(name="e!coin + coin ismi", value="Örnek: e!coin btc", inline=False)
 		embed.add_field(name="e!coin + coin ismi + adet", value="Örnek: e!coin btc 2", inline=False)
