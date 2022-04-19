@@ -14,6 +14,7 @@ class kurBilgisi(commands.Cog):
 		embed=discord.Embed(title="KOMUTLAR", description="============", color=0x00ffff)
 		embed.add_field(name="e!kur", value="Bazı para birimlerinin ve değerli madenlerin değerlerini gösterir", inline=False)
 		embed.add_field(name="e!akaryakıt", value="İstanbul avrupa bölgesindeki anlık akaryakıt fiyatlarını gösterir", inline=False)
+		embed.add_field(name="e!akaryakıt (il)", value="İstenilen ilin karyakıt fiyatlarını gösterir", inline=False)
 		embed.add_field(name="e!coins", value="Bazı kripto paraların değerlerini gösterir", inline=False)
 		embed.add_field(name="e!coin + coin ismi", value="Örnek: e!coin btc", inline=False)
 		embed.add_field(name="e!coin + coin ismi + adet", value="Örnek: e!coin btc 2", inline=False)
@@ -90,27 +91,106 @@ class kurBilgisi(commands.Cog):
 			await message.send(args[0].upper()+": "+coininfo+"$")
 
 	@commands.command()
-	async def akaryakıt(self, message):
-		
+	async def akaryakıt(self, message, *args):
+
+		if len(args) == 1:
+			try:
+				_akaryakıt_bilgi = c.akaryakıt_il(args[0])
+				
+				_il = _akaryakıt_bilgi
 			
-		kursunsuz = c.akaryakıt("K95") + " ₺ "
-		dizel = c.akaryakıt("Mot50") + " ₺ "
-		prodizel = c.akaryakıt("MotPro") + " ₺ "
-		lpg = c.akaryakıt("PoGaz") + " ₺ "
+			except:
+				await message.send("Hatalı Komut")
+
+			il = _il["Il"]
+			kursunsuz = _il["K95"] + " ₺ "
+			dizel = _il["Mot50"] + " ₺ "
+			prodizel = _il["MotPro"] + " ₺ "
+			lpg = _il["PoGaz"] + " ₺ "
 		
 		
-		tarih = datetime.datetime.now()
-		saat = tarih.hour
+			tarih = datetime.datetime.now()
+			saat = tarih.hour
 		
-		tarih = str(saat) +"."+ str(tarih.minute) +"  "+ str(tarih.day) +"."+ str(tarih.month) +"."+ str(tarih.year)
+			tarih = str(saat) +"."+ str(tarih.minute) +"  "+ str(tarih.day) +"."+ str(tarih.month) +"."+ str(tarih.year)
 		
-		embed=discord.Embed(title = "İstanbul Avrupa Fiyatları Baz Alınmıştır" ,color=0x00ffff)
-		embed.add_field(name="Kurşunsuz 95: ", value=kursunsuz, inline=False)
-		embed.add_field(name="Diesel: ", value=dizel, inline=False)
-		embed.add_field(name="Pro Diesel: ", value=prodizel, inline=False)
-		embed.add_field(name="LPG: ", value=lpg, inline=False)
-		embed.set_footer(text="Son Güncelleme Tarihi: "+tarih)
-		await message.send(embed=embed)
+			embed=discord.Embed(title = f"{il} Fiyatları Gösterilmektedir" ,color=0x00ffff)
+			embed.add_field(name="Kurşunsuz 95: ", value=kursunsuz, inline=False)
+			embed.add_field(name="Diesel: ", value=dizel, inline=False)
+			embed.add_field(name="Pro Diesel: ", value=prodizel, inline=False)
+			embed.add_field(name="LPG: ", value=lpg, inline=False)
+			embed.set_footer(text="Son Güncelleme Tarihi: "+tarih)
+			await message.send(embed=embed)
+		else:
+			kursunsuz = c.akaryakıt("K95") + " ₺ "
+			dizel = c.akaryakıt("Mot50") + " ₺ "
+			prodizel = c.akaryakıt("MotPro") + " ₺ "
+			lpg = c.akaryakıt("PoGaz") + " ₺ "
+		
+		
+			tarih = datetime.datetime.now()
+			saat = tarih.hour
+		
+			tarih = str(saat) +"."+ str(tarih.minute) +"  "+ str(tarih.day) +"."+ str(tarih.month) +"."+ str(tarih.year)
+		
+			embed=discord.Embed(title = "İstanbul Avrupa Fiyatları Baz Alınmıştır" ,color=0x00ffff)
+			embed.add_field(name="Kurşunsuz 95: ", value=kursunsuz, inline=False)
+			embed.add_field(name="Diesel: ", value=dizel, inline=False)
+			embed.add_field(name="Pro Diesel: ", value=prodizel, inline=False)
+			embed.add_field(name="LPG: ", value=lpg, inline=False)
+			embed.set_footer(text="Son Güncelleme Tarihi: "+tarih)
+			await message.send(embed=embed)
+	
+	@commands.command()
+	async def akaryakit(self, message, *args):
+
+		if len(args) == 1:
+			try:
+				_akaryakıt_bilgi = c.akaryakıt_il(args[0])
+				
+				_il = _akaryakıt_bilgi
+			
+			except:
+				await message.send("Hatalı Komut")
+
+			il = _il["Il"]
+			kursunsuz = _il["K95"] + " ₺ "
+			dizel = _il["Mot50"] + " ₺ "
+			prodizel = _il["MotPro"] + " ₺ "
+			lpg = _il["PoGaz"] + " ₺ "
+		
+		
+			tarih = datetime.datetime.now()
+			saat = tarih.hour
+		
+			tarih = str(saat) +"."+ str(tarih.minute) +"  "+ str(tarih.day) +"."+ str(tarih.month) +"."+ str(tarih.year)
+		
+			embed=discord.Embed(title = f"{il} Fiyatları Gösterilmektedir" ,color=0x00ffff)
+			embed.add_field(name="Kurşunsuz 95: ", value=kursunsuz, inline=False)
+			embed.add_field(name="Diesel: ", value=dizel, inline=False)
+			embed.add_field(name="Pro Diesel: ", value=prodizel, inline=False)
+			embed.add_field(name="LPG: ", value=lpg, inline=False)
+			embed.set_footer(text="Son Güncelleme Tarihi: "+tarih)
+			await message.send(embed=embed)
+		else:
+			kursunsuz = c.akaryakıt("K95") + " ₺ "
+			dizel = c.akaryakıt("Mot50") + " ₺ "
+			prodizel = c.akaryakıt("MotPro") + " ₺ "
+			lpg = c.akaryakıt("PoGaz") + " ₺ "
+		
+		
+			tarih = datetime.datetime.now()
+			saat = tarih.hour
+		
+			tarih = str(saat) +"."+ str(tarih.minute) +"  "+ str(tarih.day) +"."+ str(tarih.month) +"."+ str(tarih.year)
+		
+			embed=discord.Embed(title = "İstanbul Avrupa Fiyatları Baz Alınmıştır" ,color=0x00ffff)
+			embed.add_field(name="Kurşunsuz 95: ", value=kursunsuz, inline=False)
+			embed.add_field(name="Diesel: ", value=dizel, inline=False)
+			embed.add_field(name="Pro Diesel: ", value=prodizel, inline=False)
+			embed.add_field(name="LPG: ", value=lpg, inline=False)
+			embed.set_footer(text="Son Güncelleme Tarihi: "+tarih)
+			await message.send(embed=embed)
 
 	
 def setup(bot):

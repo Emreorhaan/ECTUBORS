@@ -44,23 +44,33 @@ for _petrol in _petrol_verisi:
         
     _petrol_verileri = _petrol.find_all("li")
 
-def coin(_b):
+def coin(_a):
     _coin_url = requests.get('https://api.binance.com/api/v3/ticker/price')
     _coinler = json.loads(_coin_url.content)
     _coin_fiyatlari = 0
-    _coin_adi = _b
+    _coin_adi = _a
 
     for _coin in _coinler:
         if _coin['symbol'] == _coin_adi:
             _coin_fiyatlari = _coin['price']
             a = (_coin['price'])
             return a
-def akaryakıt(_a):
-    _coin_url = requests.get('https://www.petrolofisi.com.tr/posvc/fiyat/guncel?il=%C4%B0stanbul&Ilce=BAGCILAR')
-    _coinler = json.loads(_coin_url.content)
-    for _coin in _coinler:
-        a = (_coin[_a])
+def akaryakıt(_b):
+    _akaryakıt_url = requests.get('https://www.petrolofisi.com.tr/posvc/fiyat/guncel?il=%C4%B0stanbul&Ilce=BAGCILAR')
+    _akaryakıtlar = json.loads(_akaryakıt_url.content)
+    for _akaryakıt in _akaryakıtlar:
+        a = (_akaryakıt[_b])
         return a
+
+def akaryakıt_il(_c):
+    _akaryakıt_il_url = requests.get('https://www.petrolofisi.com.tr/posvc/fiyat/guncel')
+    _akaryakıtlar = json.loads(_akaryakıt_il_url.content)
+    _akaryakıt_il = _c
+
+    for _akaryakıt in _akaryakıtlar:
+        if _akaryakıt['Il'] == _akaryakıt_il:
+            a = _akaryakıt
+            return a
  
 def dolar():
     _dolar = []
